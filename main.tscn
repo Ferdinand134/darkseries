@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd2yqsy66hgoj"]
+
+[ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://player.tscn" id="1_ej73k"]
+[ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="2_lhsp4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_ej73k")]
+position = Vector2(66, 623)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+offset_right = 1153.0
+offset_bottom = 650.0
+texture = ExtResource("2_lhsp4")
+expand_mode = 2
