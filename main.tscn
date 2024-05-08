@@ -1,19 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd2yqsy66hgoj"]
+[gd_scene load_steps=4 format=3 uid="uid://bcn4fdpstk045"]
 
-[ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://player.tscn" id="1_ej73k"]
+[ext_resource type="PackedScene" uid="uid://c6b765tcw51er" path="res://player.tscn" id="1_ej73k"]
 [ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="2_lhsp4"]
 
-[node name="Node2D" type="Node2D"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5fwqo"]
+distance = -69.0
 
-[node name="player" parent="." instance=ExtResource("1_ej73k")]
-position = Vector2(141, 292)
-up_direction = Vector2(0, 1)
+[node name="Node2D" type="Node2D"]
+position = Vector2(406, -364)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
-offset_left = -2.0
-offset_top = -3.0
-offset_right = 1151.0
-offset_bottom = 647.0
+texture_filter = 1
+offset_left = -791.0
+offset_top = -282.0
+offset_right = 624.0
+offset_bottom = 365.0
+scale = Vector2(1.04937, 1)
 texture = ExtResource("2_lhsp4")
 expand_mode = 2
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-994, 154)
+rotation = 1.57103
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-171, -411)
+scale = Vector2(3, 3)
+shape = SubResource("WorldBoundaryShape2D_5fwqo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(56, 543)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-205, -397)
+scale = Vector2(3, 3)
+shape = SubResource("WorldBoundaryShape2D_5fwqo")
+
+[node name="player" parent="." instance=ExtResource("1_ej73k")]
+position = Vector2(-644, 327)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+limit_smoothed = true
