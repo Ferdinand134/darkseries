@@ -1,5 +1,5 @@
 extends CharacterBody2D
-const SPEED = 2000
+const SPEED = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$AnimatedSprite2D.play("default")
+	pass
 	
 func _physics_process(delta):
 	var direction = Vector2(0,0)
@@ -23,5 +23,7 @@ func _physics_process(delta):
 	velocity = direction.normalized() * SPEED
 	move_and_slide()
 
-
+func updateAnimation():
+	pass
+	
 

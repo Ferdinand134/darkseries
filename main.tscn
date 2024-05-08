@@ -6,11 +6,14 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource("1_ej73k")]
-position = Vector2(66, 623)
+position = Vector2(141, 292)
+up_direction = Vector2(0, 1)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true
-offset_right = 1153.0
-offset_bottom = 650.0
+offset_left = -2.0
+offset_top = -3.0
+offset_right = 1151.0
+offset_bottom = 647.0
 texture = ExtResource("2_lhsp4")
 expand_mode = 2
