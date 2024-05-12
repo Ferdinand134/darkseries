@@ -27,10 +27,17 @@ func _physics_process(delta):
 	elif direction < 0:
 		idle.flip_h = true
 
-	if direction ==0:
-		idle.play("idle")
+	if is_on_floor():
+		if direction ==0:
+			idle.play("idle")
+		else:
+			idle.play("runningr")
 	else:
-		idle.play("runningr")
+		if velocity.y <0:
+			idle.play("going_up")
+		elif velocity.y >0 and is_on_floor:
+			idle.play("going_down")
+		
 
 	
 	if direction:
