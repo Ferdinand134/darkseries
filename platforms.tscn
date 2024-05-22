@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://76wjgsknms7h"]
+
+[ext_resource type="Texture2D" uid="uid://dwc1aufktai23" path="res://DarkForest1.2/env_ground.png" id="1_rcigo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nngw7"]
+size = Vector2(65, 20)
+
+[node name="AnimatableBody2D" type="AnimatableBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_nngw7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rcigo")
+region_enabled = true
+region_rect = Rect2(303, 231, 68, 27)

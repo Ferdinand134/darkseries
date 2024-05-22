@@ -38,11 +38,17 @@ func _physics_process(delta):
 		elif velocity.y >0 and is_on_floor:
 			idle.play("going_down")
 		
-
 	
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	if direction == 0:
+		pass
+	elif Input.is_action_just_pressed("dash"):
+		if direction>0:
+			velocity.x = 7000
+		else:
+			velocity.x = -7000
 	move_and_slide()

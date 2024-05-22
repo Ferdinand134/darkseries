@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bcn4fdpstk045"]
+[gd_scene load_steps=4 format=3 uid="uid://bd2yqsy66hgoj"]
 
-[ext_resource type="PackedScene" uid="uid://c6b765tcw51er" path="res://player.tscn" id="1_ej73k"]
+[ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://player.tscn" id="1_ej73k"]
 [ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="2_lhsp4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5fwqo"]
@@ -43,6 +43,7 @@ position = Vector2(-644, 327)
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(430, -288)
 limit_smoothed = true
+position_smoothing_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 format = 2
