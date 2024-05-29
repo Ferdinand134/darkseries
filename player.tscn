@@ -1,8 +1,33 @@
+<<<<<<< HEAD
 [gd_scene load_steps=30 format=3 uid="uid://c6b765tcw51er"]
+=======
+[gd_scene load_steps=33 format=3 uid="uid://cbcmcd483bikp"]
+>>>>>>> 9f0c4e037589bde5825dbdf3c22be7ee309484df
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
+[ext_resource type="Texture2D" uid="uid://bqobt8oloc2u5" path="res://animations/b0kmR8.png" id="2_omyfb"]
 [ext_resource type="Texture2D" uid="uid://b6228tc37u7um" path="res://animations/image (3).png" id="2_snhwp"]
 [ext_resource type="Texture2D" uid="uid://c1gexesjtbjfv" path="res://animations/idle.png" id="2_svpm8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w86jn"]
+atlas = ExtResource("2_omyfb")
+region = Rect2(0, 0, 576, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xo6dg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w86jn")
+}],
+"loop": true,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ooqqs"]
 atlas = ExtResource("2_snhwp")
@@ -197,12 +222,19 @@ size = Vector2(24, 64)
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_lgubq")
 
+[node name="dashing" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(-19, -38)
+rotation = -0.00401305
+sprite_frames = SubResource("SpriteFrames_xo6dg")
+animation = &"dash"
+
 [node name="idle" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-6, -15)
+position = Vector2(-3, -9)
 rotation = -0.00401305
 sprite_frames = SubResource("SpriteFrames_00i2c")
-animation = &"runningr"
+animation = &"going_down"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
