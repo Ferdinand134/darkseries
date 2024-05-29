@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [gd_scene load_steps=30 format=3 uid="uid://c6b765tcw51er"]
 =======
 [gd_scene load_steps=33 format=3 uid="uid://cbcmcd483bikp"]
 >>>>>>> 9f0c4e037589bde5825dbdf3c22be7ee309484df
+=======
+[gd_scene load_steps=30 format=3 uid="uid://cbcmcd483bikp"]
+>>>>>>> parent of c8c15f5 (small tings)
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
 [ext_resource type="Texture2D" uid="uid://bqobt8oloc2u5" path="res://animations/b0kmR8.png" id="2_omyfb"]
