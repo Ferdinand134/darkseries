@@ -8,7 +8,7 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var idle = $idle
 @onready var collision_shape_2d = $CollisionShape2D
-
+@onready var dashing = $dashing
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -31,12 +31,22 @@ func _physics_process(delta):
 		if direction ==0:
 			idle.play("idle")
 		else:
-			idle.play("runningr")
+			if Input.is_action_just_pressed("dash"):
+				dashing.play("dash")
+			else:
+				idle.play("runningr")
 	else:
 		if velocity.y <0:
-			idle.play("going_up")
+			if Input.is_action_just_pressed("dash"):
+				dashing.play("dash")
+			else:
+				idle.play("going_up")
 		elif velocity.y >0 and is_on_floor:
-			idle.play("going_down")
+			if Input.is_action_just_pressed("dash"):
+				dashing.play("dash")
+			else:
+				idle.play("going_down")
+			
 		
 	
 	if direction:
