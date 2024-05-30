@@ -1,7 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bd2yqsy66hgoj"]
+[gd_scene load_steps=7 format=3 uid="uid://bd2yqsy66hgoj"]
 
 [ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://player.tscn" id="1_ej73k"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="1_lvpda"]
+[ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="1_xebmv"]
 [ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="2_lhsp4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_42kr0"]
+font = ExtResource("1_xebmv")
+font_size = 76
+font_color = Color(0, 0.168627, 0.0117647, 1)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5fwqo"]
 distance = -69.0
@@ -11,20 +18,16 @@ position = Vector2(406, -364)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor_description = "Hellos"
+follow_viewport_enabled = true
+script = ExtResource("1_lvpda")
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer"]
-offset_left = 30.0
-offset_top = -48.0
-offset_right = 295.0
-offset_bottom = -25.0
-text = "Score0
-"
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
-offset_left = 286.0
-offset_top = -104.0
-offset_right = 326.0
-offset_bottom = -64.0
+offset_left = 257.0
+offset_top = -503.0
+offset_right = 718.0
+offset_bottom = -392.0
+text = "How to Play "
+label_settings = SubResource("LabelSettings_42kr0")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 show_behind_parent = true

@@ -1,45 +1,33 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-[gd_scene load_steps=30 format=3 uid="uid://c6b765tcw51er"]
-=======
-[gd_scene load_steps=33 format=3 uid="uid://cbcmcd483bikp"]
->>>>>>> 9f0c4e037589bde5825dbdf3c22be7ee309484df
-=======
-[gd_scene load_steps=30 format=3 uid="uid://cbcmcd483bikp"]
->>>>>>> parent of c8c15f5 (small tings)
-=======
-[gd_scene load_steps=30 format=3 uid="uid://cbcmcd483bikp"]
->>>>>>> parent of c8c15f5 (small tings)
-=======
-[gd_scene load_steps=30 format=3 uid="uid://cbcmcd483bikp"]
->>>>>>> parent of c8c15f5 (small tings)
+[gd_scene load_steps=38 format=3 uid="uid://cbcmcd483bikp"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
-[ext_resource type="Texture2D" uid="uid://bqobt8oloc2u5" path="res://animations/b0kmR8.png" id="2_omyfb"]
+[ext_resource type="Texture2D" uid="uid://dpqw35000jgo3" path="res://animations/attacking.png" id="2_hf84g"]
 [ext_resource type="Texture2D" uid="uid://b6228tc37u7um" path="res://animations/image (3).png" id="2_snhwp"]
 [ext_resource type="Texture2D" uid="uid://c1gexesjtbjfv" path="res://animations/idle.png" id="2_svpm8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_w86jn"]
-atlas = ExtResource("2_omyfb")
-region = Rect2(0, 0, 576, 300)
+[sub_resource type="AtlasTexture" id="AtlasTexture_clybg"]
+atlas = ExtResource("2_hf84g")
+region = Rect2(0, 300, 576, 300)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xo6dg"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w86jn")
-}],
-"loop": true,
-"name": &"dash",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
+[sub_resource type="AtlasTexture" id="AtlasTexture_3aeg3"]
+atlas = ExtResource("2_hf84g")
+region = Rect2(576, 300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4d76"]
+atlas = ExtResource("2_hf84g")
+region = Rect2(1152, 300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuyyk"]
+atlas = ExtResource("2_hf84g")
+region = Rect2(1728, 300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivbln"]
+atlas = ExtResource("2_hf84g")
+region = Rect2(0, 600, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g66rr"]
+atlas = ExtResource("2_hf84g")
+region = Rect2(576, 600, 576, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ooqqs"]
 atlas = ExtResource("2_snhwp")
@@ -140,6 +128,29 @@ region = Rect2(576, 900, 576, 300)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_clybg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3aeg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4d76")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuyyk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivbln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g66rr")
+}],
+"loop": false,
+"name": &"attacking",
+"speed": 14.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_ooqqs")
 }],
 "loop": true,
@@ -231,25 +242,38 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_juh14"]
 size = Vector2(24, 64)
 
-[node name="player" type="CharacterBody2D"]
-script = ExtResource("1_lgubq")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6fvrm"]
+size = Vector2(80, 57)
 
-[node name="dashing" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(-19, -38)
-rotation = -0.00401305
-sprite_frames = SubResource("SpriteFrames_xo6dg")
-animation = &"dash"
+[node name="player" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_lgubq")
 
 [node name="idle" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(-3, -9)
+position = Vector2(-6, -15)
 rotation = -0.00401305
 sprite_frames = SubResource("SpriteFrames_00i2c")
-animation = &"going_down"
+animation = &"attacking"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
 position = Vector2(-19, -33)
 shape = SubResource("RectangleShape2D_juh14")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.336
+
+[node name="Attackbox" type="Area2D" parent="."]
+position = Vector2(-49, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
+position = Vector2(97, -12.5)
+shape = SubResource("RectangleShape2D_6fvrm")
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.504
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

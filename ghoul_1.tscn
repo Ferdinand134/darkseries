@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdjo8xsm6jilb"]
+
+[ext_resource type="Script" path="res://ghoul1.gd" id="1_m2yv8"]
+
+[node name="ghoul1" type="CharacterBody2D"]
+collision_layer = 4
+script = ExtResource("1_m2yv8")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
