@@ -5,7 +5,7 @@ const JUMP_VELOCITY = -400.0
 const DASH_VELOCITY = 7000.0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-@onready var attackbox = $Attackbox
+@onready var attackbox = $player_attack
 @onready var timer = $Timer
 @onready var idle = $idle
 @onready var collision_shape_2d = $CollisionShape2D

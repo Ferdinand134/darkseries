@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd2yqsy66hgoj"]
+[gd_scene load_steps=8 format=3 uid="uid://bd2yqsy66hgoj"]
 
 [ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://player.tscn" id="1_ej73k"]
 [ext_resource type="Script" path="res://CanvasLayer.gd" id="1_lvpda"]
+[ext_resource type="PackedScene" uid="uid://cdjo8xsm6jilb" path="res://ghoul_1.tscn" id="1_v3xml"]
 [ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="1_xebmv"]
 [ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="2_lhsp4"]
 
@@ -15,6 +16,9 @@ distance = -69.0
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(406, -364)
+
+[node name="ghoul1" parent="." instance=ExtResource("1_v3xml")]
+position = Vector2(-481, 301)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor_description = "Hellos"
@@ -61,7 +65,10 @@ shape = SubResource("WorldBoundaryShape2D_5fwqo")
 position = Vector2(-644, 327)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(430, -288)
+position = Vector2(71, -293)
+limit_left = -380
+limit_right = 1480
+limit_bottom = 1
 limit_smoothed = true
 position_smoothing_enabled = true
 

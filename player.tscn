@@ -246,7 +246,7 @@ size = Vector2(24, 64)
 size = Vector2(80, 57)
 
 [node name="player" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 3
 script = ExtResource("1_lgubq")
 
 [node name="idle" type="AnimatedSprite2D" parent="."]
@@ -265,10 +265,11 @@ shape = SubResource("RectangleShape2D_juh14")
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.336
 
-[node name="Attackbox" type="Area2D" parent="."]
+[node name="player_attack" type="Area2D" parent="."]
 position = Vector2(-49, -14)
+collision_layer = 12
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Attackbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player_attack"]
 position = Vector2(97, -12.5)
 shape = SubResource("RectangleShape2D_6fvrm")
 
