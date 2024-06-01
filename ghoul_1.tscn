@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cdjo8xsm6jilb"]
+[gd_scene load_steps=50 format=3 uid="uid://cdjo8xsm6jilb"]
 
 [ext_resource type="Script" path="res://ghoul1.gd" id="1_m2yv8"]
 [ext_resource type="Texture2D" uid="uid://b5mk43l6yroxf" path="res://animationse/VU3H+b.png" id="2_pfd58"]
@@ -34,6 +34,10 @@ region = Rect2(0, 2100, 960, 420)
 [sub_resource type="AtlasTexture" id="AtlasTexture_hyh1e"]
 atlas = ExtResource("2_pfd58")
 region = Rect2(0, 0, 960, 420)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ank3"]
+atlas = ExtResource("2_pfd58")
+region = Rect2(0, 2520, 960, 420)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tkr1p"]
 atlas = ExtResource("2_pfd58")
@@ -204,6 +208,9 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_6ank3")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_tkr1p")
 }, {
 "duration": 1.0,
@@ -227,7 +234,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_of0w2")
 }],
-"loop": false,
+"loop": true,
 "name": &"death",
 "speed": 12.0
 }, {
@@ -330,27 +337,27 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pq86"]
-size = Vector2(21, 83)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_x2c4n"]
 radius = 213.677
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vcmpi"]
+size = Vector2(42, 106)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_piuup"]
+radius = 41.9319
+
 [node name="ghoul1" type="CharacterBody2D"]
 position = Vector2(200, 77)
-collision_layer = 7
+collision_layer = 5
 script = ExtResource("1_m2yv8")
 
 [node name="idle" type="AnimatedSprite2D" parent="."]
-position = Vector2(269, 18)
+position = Vector2(14, -2)
 sprite_frames = SubResource("SpriteFrames_cwipi")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.552656
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 14.5)
-shape = SubResource("RectangleShape2D_1pq86")
+frame_progress = 0.897425
+offset = Vector2(5, 0)
 
 [node name="Area_detection" type="Area2D" parent="."]
 collision_layer = 2
@@ -358,6 +365,18 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_detection"]
 shape = SubResource("CircleShape2D_x2c4n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_vcmpi")
+
+[node name="enemy_hitbox" type="Area2D" parent="."]
+scale = Vector2(1.07614, 1.09124)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hitbox"]
+position = Vector2(8.36322, -4.58196)
+scale = Vector2(1.13025, 2.32286)
+shape = SubResource("CircleShape2D_piuup")
 
 [connection signal="body_entered" from="Area_detection" to="." method="_on_area_detection_body_entered"]
 [connection signal="body_exited" from="Area_detection" to="." method="_on_area_detection_body_exited"]

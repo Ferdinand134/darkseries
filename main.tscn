@@ -17,9 +17,6 @@ distance = -69.0
 [node name="Node2D" type="Node2D"]
 position = Vector2(406, -364)
 
-[node name="ghoul1" parent="." instance=ExtResource("1_v3xml")]
-position = Vector2(-481, 301)
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor_description = "Hellos"
 follow_viewport_enabled = true
@@ -72,5 +69,6 @@ limit_bottom = 1
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="TileMap" type="TileMap" parent="."]
-format = 2
+[node name="ghoul1" parent="." instance=ExtResource("1_v3xml")]
+position = Vector2(-215, -145)
+scale = Vector2(0.761733, 0.779365)
