@@ -22,6 +22,7 @@ var is_attacking = false
 
 
 func _physics_process(delta):
+	#handles attacking animations
 	if is_attacking:
 		if idle.animation != "attacking":
 			is_attacking = false
@@ -77,41 +78,33 @@ func _physics_process(delta):
 		if not attack_cooldown.is_stopped():
 			print("Attack is on cooldown.")
 		else:
+			Global.player_current_attack = true
 			timer.start()
 			start_attack()
 			attack_cooldown.start()
+			
 
 	move_and_slide()
 	enemy_attack()
+	
+	
 func start_attack():
 	is_attacking = true
-	timer.wait_time= 0.4
 	velocity = Vector2.ZERO
 	idle.play("attacking")
 	idle.frame = 0  # Ensure the animation starts from the first frame
 	if idle.frame ==2: 
-		pass #enable_hitbox()
+		pass
 	print("Attack started.")
 	
-#func enable_hitbox():
-	#attackbox.set_deferred("monitoring", true)
-	#attackbox.set_deferred("disabled", false)
-
-#func disable_hitbox():
-	#attackbox.set_deferred("monitoring", false)
-	#attackbox.set_deferred("disabled", true)
 
 
 #stops player movement when they attack
-#func _on_timer_timeout():
-	#is_attacking =false
-	#print("attack finished") # Replace with function body.
-	#disable_hitbox()
+func _on_timer_timeout():
+	is_attacking =false
+	print("attack finished") # Replace with function body.
+	Global.player_current_attack = false
 	
-func _on_attack_hitbox_entered(body):
-	if body.is_in_group("enemies"):
-		print("Hit enemy: ", body.name)
-		# Handle enemy hit logic here
 
 func player():
 	pass
@@ -132,9 +125,12 @@ func enemy_attack():
 		print("player has been hit")
 		
 
-
+#Handels when the player can take damage again
 func _on_damage_cooldown_timeout():
 	enemy_attack_cooldown = true
 
 
-
+#attacking the enemy
+func _on_player_attack_body_entered(body):
+	if body.has_method("enemy"):
+		print("Hit enemy: ", body.name)

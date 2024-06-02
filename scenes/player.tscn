@@ -274,7 +274,6 @@ shape = SubResource("RectangleShape2D_juh14")
 wait_time = 0.336
 
 [node name="player_attack" type="Area2D" parent="."]
-visible = false
 position = Vector2(-49, -14)
 collision_layer = 12
 
@@ -287,6 +286,7 @@ wait_time = 0.504
 one_shot = true
 
 [node name="damage_cooldown" type="Timer" parent="."]
+wait_time = 2.996
 
 [node name="player_hitbox" type="Area2D" parent="."]
 position = Vector2(-6, -15)
@@ -297,7 +297,7 @@ position = Vector2(-11.9237, -19.048)
 shape = SubResource("CircleShape2D_a7mqp")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="player_attack" to="." method="_on_player_attack_body_entered"]
 [connection signal="timeout" from="damage_cooldown" to="." method="_on_damage_cooldown_timeout"]
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
-[connection signal="body_shape_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_shape_exited"]

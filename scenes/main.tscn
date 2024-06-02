@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://bd2yqsy66hgoj"]
 
-[ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://player.tscn" id="1_ej73k"]
-[ext_resource type="Script" path="res://CanvasLayer.gd" id="1_lvpda"]
-[ext_resource type="PackedScene" uid="uid://cdjo8xsm6jilb" path="res://ghoul_1.tscn" id="1_v3xml"]
-[ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="1_xebmv"]
-[ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="2_lhsp4"]
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="1_m25tv"]
+[ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="2_cd43o"]
+[ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="3_6jqhf"]
+[ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://scenes/player.tscn" id="4_bqugq"]
+[ext_resource type="PackedScene" uid="uid://cdjo8xsm6jilb" path="res://ghoul_1.tscn" id="5_tplpl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_42kr0"]
-font = ExtResource("1_xebmv")
+font = ExtResource("2_cd43o")
 font_size = 76
 font_color = Color(0, 0.168627, 0.0117647, 1)
 
@@ -20,7 +20,7 @@ position = Vector2(406, -364)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor_description = "Hellos"
 follow_viewport_enabled = true
-script = ExtResource("1_lvpda")
+script = ExtResource("1_m25tv")
 
 [node name="ScoreLabel" type="Label" parent="CanvasLayer"]
 offset_left = 257.0
@@ -38,7 +38,7 @@ offset_top = -352.0
 offset_right = 987.0
 offset_bottom = 365.0
 scale = Vector2(1.04937, 1)
-texture = ExtResource("2_lhsp4")
+texture = ExtResource("3_6jqhf")
 expand_mode = 2
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
@@ -58,7 +58,7 @@ position = Vector2(-205, -397)
 scale = Vector2(3, 3)
 shape = SubResource("WorldBoundaryShape2D_5fwqo")
 
-[node name="player" parent="." instance=ExtResource("1_ej73k")]
+[node name="player" parent="." instance=ExtResource("4_bqugq")]
 position = Vector2(-644, 327)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
@@ -69,6 +69,6 @@ limit_bottom = 1
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="ghoul1" parent="." instance=ExtResource("1_v3xml")]
+[node name="ghoul1" parent="." instance=ExtResource("5_tplpl")]
 position = Vector2(-215, -145)
 scale = Vector2(0.761733, 0.779365)
