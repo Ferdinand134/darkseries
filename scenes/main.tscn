@@ -34,7 +34,7 @@ label_settings = SubResource("LabelSettings_42kr0")
 show_behind_parent = true
 texture_filter = 1
 offset_left = -791.0
-offset_top = -352.0
+offset_top = -523.0
 offset_right = 987.0
 offset_bottom = 365.0
 scale = Vector2(1.04937, 1)
@@ -69,6 +69,10 @@ limit_bottom = 1
 limit_smoothed = true
 position_smoothing_enabled = true
 
+[node name="ghoul2" parent="." instance=ExtResource("5_tplpl")]
+position = Vector2(-250, 150)
+scale = Vector2(0.580237, 0.60741)
+
 [node name="ghoul1" parent="." instance=ExtResource("5_tplpl")]
-position = Vector2(-215, -145)
+position = Vector2(480, 150)
 scale = Vector2(0.761733, 0.779365)
