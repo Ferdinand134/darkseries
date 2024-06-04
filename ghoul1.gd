@@ -2,14 +2,15 @@ extends CharacterBody2D
 class_name ghoul1
 
 @onready var area_detection = $Area_detection
-@onready var player_detector = $PlayerDetector
 @onready var enemy_attack = $enemy_attack
 @onready var idle = $idle
 @onready var attack_timer = $attack_timer
-@onready var damageable = $damageable
+@onready var enemy_damage = $damageable
 @onready var damage_timer = $damage_timer
-@onready var death_timer = $death_timer
-@onready var body = $body
+@onready var body_enemy = $body_enemy
+@onready var detect_player = $detect_player
+@export var knockback_velocity : float = 1000
+@onready var bug_timer = $bug_timer
 
 
 var enemy_hit = false
@@ -36,8 +37,8 @@ func _physics_process(delta):
 		if idle.flip_h:
 			position.x= position.x+1
 			moving = true
-		if idle.flip_h ==false:
-			position.x = position.x-1
+		if idle.flip_h == false:
+			#position.x = position.x-1
 			moving = true
 		if taking_damage ==  false:
 			enemy_hit = false
@@ -45,10 +46,10 @@ func _physics_process(delta):
 		elif dead:
 			area_detection.monitoring = false
 			pass
-		moving = false
 	elif is_attacking:
 		moving = false
-		if idle.animation != "attacking":
+		idle.play("attacking")
+		if idle.frame==6:
 			is_attacking = false
 			print("Attack finished, resuming movement.")
 	else:
@@ -74,7 +75,7 @@ func _on_area_detection_body_exited(body):
 	player = null
 	player_chase = false
 
-func _on_enemy_attack_body_entered(body):
+func _on_detect_player_body_entered(body):
 	if body.has_method("player"):
 		player_inattack_zone = true
 		is_attacking = true
@@ -83,24 +84,25 @@ func _on_enemy_attack_body_entered(body):
 		print("player has entered attack range")
 		hit()
 
-func _on_enemy_attack_body_exited(body):
-	player_inattack_zone = false
-	is_attacking = false
-	attack_cooldown = true
-	if body.has_method("player"):
-		print("player has exited attack range")
+func _on_detect_player_body_exited(body):
+	if idle.animation == "attacking":
+		bug_timer.start()
+	else:
+		player_inattack_zone = false
+		is_attacking = false
+		attack_cooldown = true
+		if body.has_method("player"):
+			print("player has exited attack range")
 
 func hit():
 	if attack_cooldown == false and player_inattack_zone and dead == false and moving == false:
 		is_attacking = true
 		attack_cooldown = true
-		idle.play("attacking")
 		attack_timer.start()
-		if idle.frame == 2:
-			enemy_attack.monitoring == true
-
+		
 func _on_attack_timer_timeout():
 	attack_cooldown = false
+	print("done")
 	hit()
 	
 
@@ -126,3 +128,18 @@ func _on_death_timer_timeout():
 	print("finished")
 	self.queue_free()
 	
+
+func _on_idle_frame_changed():
+	if is_attacking:
+		if idle.animation == "attacking":
+			if idle.frame == 2:
+				enemy_attack.monitoring = true
+		else:
+			enemy_attack.monitoring = false
+
+
+
+func _on_bug_timer_timeout():
+	player_inattack_zone = false
+	is_attacking = false
+	attack_cooldown = true

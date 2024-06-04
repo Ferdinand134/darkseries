@@ -1,8 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://cbcmcd483bikp"]
+[gd_scene load_steps=62 format=3 uid="uid://cbcmcd483bikp"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
 [ext_resource type="Texture2D" uid="uid://cq4d77x74exua" path="res://animations/b0kmR8.png" id="2_oljpt"]
 [ext_resource type="Script" path="res://scenes/sword.gd" id="5_e8nqg"]
+[ext_resource type="Script" path="res://damagable.gd" id="5_xx84g"]
 [ext_resource type="Script" path="res://scenes/FacingCollisionShape.gd" id="6_x48ll"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyngr"]
@@ -32,6 +33,94 @@ region = Rect2(0, 1800, 576, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_b84f0"]
 atlas = ExtResource("2_oljpt")
 region = Rect2(576, 1800, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lpqp"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(576, 2100, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irdk7"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1152, 2100, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p487"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1728, 2100, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4r3i8"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(2304, 2100, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3mlf"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(0, 2400, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dvp0"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(576, 2400, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0tkv"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1152, 2400, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65fkr"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1728, 2400, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aeebm"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(2304, 2400, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_31c2r"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(0, 2700, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhisb"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(576, 2700, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyckh"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1152, 2700, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqhsj"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1728, 2700, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15shc"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(2304, 2700, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lcsfs"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(0, 3000, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5k25"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(576, 3000, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ak7go"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1152, 3000, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asmb5"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1728, 3000, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4wc1"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(2304, 3000, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xv832"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(0, 3300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_chttk"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(576, 3300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7xo0"]
+atlas = ExtResource("2_oljpt")
+region = Rect2(1152, 3300, 576, 300)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_scxae"]
 load_path = "res://.godot/imported/image (3).png-9a7e48aa6604dfa659e090373a611c10.ctex"
@@ -152,10 +241,76 @@ animations = [{
 "name": &"attacking",
 "speed": 14.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lpqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irdk7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7p487")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4r3i8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3mlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dvp0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0tkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65fkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aeebm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_31c2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhisb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyckh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqhsj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15shc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lcsfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5k25")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ak7go")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asmb5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4wc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xv832")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_chttk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7xo0")
+}],
 "loop": true,
 "name": &"death",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -171,6 +326,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"going_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooqqs")
+}],
+"loop": true,
+"name": &"hit",
 "speed": 5.0
 }, {
 "frames": [{
@@ -262,7 +425,7 @@ texture_filter = 1
 position = Vector2(-24, -39)
 rotation = -0.00401305
 sprite_frames = SubResource("SpriteFrames_00i2c")
-animation = &"going_up"
+animation = &"death"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -275,11 +438,10 @@ wait_time = 0.336
 one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.504
 one_shot = true
 
 [node name="damage_cooldown" type="Timer" parent="."]
-wait_time = 2.996
+wait_time = 1.316
 one_shot = true
 
 [node name="player_hitbox" type="Area2D" parent="."]
@@ -304,6 +466,13 @@ script = ExtResource("6_x48ll")
 facing_left_postion = Vector2(-85, -25.75)
 facing_right_position = Vector2(46, -25.75)
 
+[node name="damageable" type="Node" parent="."]
+script = ExtResource("5_xx84g")
+health = 40.0
+
+[node name="death_timer" type="Timer" parent="damageable"]
+wait_time = 1.509
+
 [connection signal="frame_changed" from="idle" to="." method="_on_idle_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="damage_cooldown" to="." method="_on_damage_cooldown_timeout"]
@@ -311,3 +480,5 @@ facing_right_position = Vector2(46, -25.75)
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="sword" to="." method="_on_sword_body_entered"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]
+[connection signal="enemy_hit" from="damageable" to="." method="_on_damageable_enemy_hit"]
+[connection signal="timeout" from="damageable/death_timer" to="." method="_on_death_timer_timeout"]

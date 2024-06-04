@@ -1,10 +1,12 @@
-[gd_scene load_steps=51 format=3 uid="uid://cdjo8xsm6jilb"]
+[gd_scene load_steps=53 format=3 uid="uid://cdjo8xsm6jilb"]
 
 [ext_resource type="Script" path="res://ghoul1.gd" id="1_m2yv8"]
 [ext_resource type="Texture2D" uid="uid://b5mk43l6yroxf" path="res://animationse/VU3H+b.png" id="2_pfd58"]
 [ext_resource type="Script" path="res://FacingCollisionShape.gd" id="3_3ldkt"]
 [ext_resource type="Script" path="res://enemy_attack.gd" id="3_n508f"]
 [ext_resource type="Script" path="res://damagable.gd" id="3_vacxv"]
+[ext_resource type="Script" path="res://detect_player.gd" id="6_5wdab"]
+[ext_resource type="Script" path="res://CollisionShape2D.gd" id="7_ba0es"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bi2j8"]
 atlas = ExtResource("2_pfd58")
@@ -192,7 +194,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attacking",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -219,7 +221,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x3scx")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 12.0
 }, {
@@ -328,11 +330,11 @@ radius = 213.677
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcmpi"]
 size = Vector2(42, 106)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6w3r5"]
-size = Vector2(130, 113)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7s84k"]
-size = Vector2(130, 101.5)
+size = Vector2(137, 101.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r24sh"]
+size = Vector2(137, 101)
 
 [node name="ghoul1" type="CharacterBody2D"]
 position = Vector2(200, 77)
@@ -353,31 +355,26 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_detection"]
 shape = SubResource("CircleShape2D_x2c4n")
 
-[node name="body" type="CollisionShape2D" parent="."]
+[node name="body_enemy" type="CollisionShape2D" parent="."]
 position = Vector2(10, 3)
 shape = SubResource("RectangleShape2D_vcmpi")
 
-[node name="detect_player" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detect_player"]
-position = Vector2(122, 4.5)
-shape = SubResource("RectangleShape2D_6w3r5")
-
 [node name="enemy_attack" type="Area2D" parent="." node_paths=PackedStringArray("ghoul", "facing_collision_shape")]
+monitoring = false
 script = ExtResource("3_n508f")
 ghoul = NodePath("..")
 facing_collision_shape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_attack"]
 modulate = Color(0, 0.337255, 1, 1)
-position = Vector2(102, 0.25)
+position = Vector2(98.5, 0.25)
 shape = SubResource("RectangleShape2D_7s84k")
 script = ExtResource("3_3ldkt")
 facing_left_postion = Vector2(-80, 0.25)
 facing_right_position = Vector2(112, 0.25)
 
 [node name="attack_timer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 1.053
 one_shot = true
 
 [node name="damage_timer" type="Timer" parent="."]
@@ -386,19 +383,37 @@ one_shot = true
 
 [node name="damageable" type="Node" parent="."]
 script = ExtResource("3_vacxv")
-health = 300.0
+health = 30.0
 
 [node name="death_timer" type="Timer" parent="damageable"]
 wait_time = 0.506
 one_shot = true
 
+[node name="detect_player" type="Area2D" parent="." node_paths=PackedStringArray("ghoul", "facing_collision_shape")]
+script = ExtResource("6_5wdab")
+damage = null
+ghoul = NodePath("..")
+facing_collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect_player"]
+position = Vector2(98.5, 0.25)
+shape = SubResource("RectangleShape2D_r24sh")
+script = ExtResource("7_ba0es")
+facing_left_postion = Vector2(-80, 0.25)
+facing_right_position = Vector2(112, 0.25)
+
+[node name="bug_timer" type="Timer" parent="."]
+
+[connection signal="frame_changed" from="idle" to="." method="_on_idle_frame_changed"]
 [connection signal="body_entered" from="Area_detection" to="." method="_on_area_detection_body_entered"]
 [connection signal="body_exited" from="Area_detection" to="." method="_on_area_detection_body_exited"]
-[connection signal="body_entered" from="detect_player" to="." method="_on_detect_player_body_entered"]
-[connection signal="body_exited" from="detect_player" to="." method="_on_detect_player_body_exited"]
 [connection signal="body_entered" from="enemy_attack" to="." method="_on_enemy_attack_body_entered"]
+[connection signal="body_entered" from="enemy_attack" to="enemy_attack" method="_on_body_entered"]
 [connection signal="body_exited" from="enemy_attack" to="." method="_on_enemy_attack_body_exited"]
 [connection signal="timeout" from="attack_timer" to="." method="_on_attack_timer_timeout"]
 [connection signal="timeout" from="damage_timer" to="." method="_on_damage_timer_timeout"]
 [connection signal="enemy_hit" from="damageable" to="." method="_on_damageable_enemy_hit"]
 [connection signal="timeout" from="damageable/death_timer" to="." method="_on_death_timer_timeout"]
+[connection signal="body_entered" from="detect_player" to="." method="_on_detect_player_body_entered"]
+[connection signal="body_exited" from="detect_player" to="." method="_on_detect_player_body_exited"]
+[connection signal="timeout" from="bug_timer" to="." method="_on_bug_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bxq3pwto374hp"]
+[gd_scene load_steps=21 format=3 uid="uid://bxq3pwto374hp"]
 
 [ext_resource type="Texture2D" uid="uid://33behi6f1byu" path="res://DarkForest1.2/env_rock.png" id="1_qw670"]
 [ext_resource type="Texture2D" uid="uid://dwc1aufktai23" path="res://DarkForest1.2/env_ground.png" id="2_k1y6b"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ckprxwf21yq34" path="res://DarkForest1.2/decorative_obj.png" id="7_r6llt"]
 [ext_resource type="Texture2D" uid="uid://b165m0ylr205u" path="res://Dungeon Tile Set/Dungeon Tile Set.png" id="8_dblrk"]
 [ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://scenes/player.tscn" id="9_3mpq5"]
+[ext_resource type="PackedScene" uid="uid://cdjo8xsm6jilb" path="res://ghoul_1.tscn" id="10_yhhay"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pv2yp"]
 texture = ExtResource("1_qw670")
@@ -13407,3 +13408,7 @@ rotation = 1.58479
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_fyrwn")
+
+[node name="ghoul1" parent="." instance=ExtResource("10_yhhay")]
+position = Vector2(1693, 170)
+scale = Vector2(0.368501, 0.436113)
