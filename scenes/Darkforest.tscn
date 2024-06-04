@@ -13394,6 +13394,7 @@ layer_1/tile_data = PackedInt32Array(458829, 1048576, 24, 524365, 1048576, 25, 5
 [node name="player" parent="." instance=ExtResource("9_3mpq5")]
 position = Vector2(-269, -6)
 scale = Vector2(0.4, 0.4)
+DASH_VELOCITY = 4000.0
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(430, -166)
@@ -13411,4 +13412,4 @@ shape = SubResource("WorldBoundaryShape2D_fyrwn")
 
 [node name="ghoul1" parent="." instance=ExtResource("10_yhhay")]
 position = Vector2(1693, 170)
-scale = Vector2(0.368501, 0.436113)
+scale = Vector2(0.309987, 0.311001)

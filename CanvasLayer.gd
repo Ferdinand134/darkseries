@@ -7,7 +7,7 @@ var instructions = [
 	{"text": "Press D to move right", "action": "move_right"},
 	{"text": "Press J to dash", "action": "dash"},
 	{"text": "Press K to attack", "action": "attack"},
-	{"text": "Kill this","action":"attack"}
+	{"text": "Kill this","action":Global.all_ghouls_dead == true}
 ]
 var current_instruction_index = 0
 

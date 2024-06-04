@@ -143,3 +143,12 @@ func _on_bug_timer_timeout():
 	player_inattack_zone = false
 	is_attacking = false
 	attack_cooldown = true
+
+
+func _on_tree_entered():
+	Global.enemy_count += 1
+	print("enter")
+
+
+func _on_tree_exited():
+	Global.enemy_count -= 1

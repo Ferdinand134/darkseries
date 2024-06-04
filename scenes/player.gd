@@ -2,12 +2,10 @@ extends CharacterBody2D
 
 class_name Player
 
-const SPEED = 150.0
-const JUMP_VELOCITY = -400.0
-const DASH_VELOCITY = 7000.0
 
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") +80
 @onready var timer = $Timer
 @onready var idle = $idle
 @onready var collision_shape_2d = $CollisionShape2D
@@ -16,6 +14,10 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var sword = $sword
 @onready var damageable = $damageable
 @export var knockback_velocity : float = 900
+@export var SPEED = 150.0
+@export var JUMP_VELOCITY = -400.0
+@export var DASH_VELOCITY = 7000.0
+
 
 var enemy_inattack_range = false
 var enemy_attack_cooldown = true

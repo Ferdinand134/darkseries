@@ -194,7 +194,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attacking",
-"speed": 10.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -223,7 +223,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 12.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -344,11 +344,12 @@ script = ExtResource("1_m2yv8")
 [node name="idle" type="AnimatedSprite2D" parent="."]
 position = Vector2(14, -2)
 sprite_frames = SubResource("SpriteFrames_02ydw")
-animation = &"death"
+animation = &"attacking"
 autoplay = "idle"
 offset = Vector2(-5, 0)
 
 [node name="Area_detection" type="Area2D" parent="."]
+scale = Vector2(1.91502, 1.92377)
 collision_layer = 2
 collision_mask = 2
 
@@ -404,6 +405,8 @@ facing_right_position = Vector2(112, 0.25)
 
 [node name="bug_timer" type="Timer" parent="."]
 
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
+[connection signal="tree_exited" from="." to="." method="_on_tree_exited"]
 [connection signal="frame_changed" from="idle" to="." method="_on_idle_frame_changed"]
 [connection signal="body_entered" from="Area_detection" to="." method="_on_area_detection_body_entered"]
 [connection signal="body_exited" from="Area_detection" to="." method="_on_area_detection_body_exited"]
