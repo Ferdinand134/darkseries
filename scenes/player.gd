@@ -15,11 +15,14 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") +80
 @onready var transition_button = $"../CanvasLayer2/TransitionButton"
 @onready var sword = $sword
 @onready var enter_area = $"../enter_area"
+@onready var player_hitbox = $player_hitbox
 @onready var damageable = $damageable
 @export var knockback_velocity : float = 1000
 @export var SPEED = 150.0
 @export var JUMP_VELOCITY = -400.0
 @export var DASH_VELOCITY = 4000.0
+@onready var death_timer = $damageable/death_timer
+
 
 var door_area =false
 var enemy_inattack_range = false
@@ -50,7 +53,11 @@ func _physics_process(delta):
 				velocity.y = move_toward(velocity.y, knockback_velocity, knockback_velocity * 0.1)
 				move_and_slide()
 				moving = true
+		elif dead:
+			player_hitbox.monitoring = false
+			player_hitbox.monitorable = false
 		moving = false
+		
 	#handles attacking animations
 	elif is_attacking:
 		moving = false
@@ -160,6 +167,7 @@ func _on_damageable_enemy_hit(word):
 		player_hit = true
 		dead = true
 		taking_damage = true
+		death_timer.start()
 
 
 func _on_damage_cooldown_timeout():
@@ -167,9 +175,7 @@ func _on_damage_cooldown_timeout():
 	print("end timer")
 
 
-func _on_death_timer_timeout():
-	print("finished")
-	self.queue_free()
+
 	
 
 func _on_dashing_timer_timeout():
@@ -178,5 +184,9 @@ func _on_dashing_timer_timeout():
 
 func _on_enter_area_body_entered(body):
 	if body.has_method("player"):
-		print("insdfsdfsdfsdfsdfsdfsdf")
 		door_area = true
+
+
+func _on_death_timer_timeout():
+	print("finished")
+	self.queue_free()

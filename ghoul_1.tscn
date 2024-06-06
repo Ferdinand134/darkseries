@@ -325,7 +325,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x2c4n"]
-radius = 360.954
+radius = 512.218
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcmpi"]
 size = Vector2(42, 106)
@@ -353,6 +353,7 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area_detection"]
+position = Vector2(7.56567, 0)
 shape = SubResource("CircleShape2D_x2c4n")
 
 [node name="body_enemy" type="CollisionShape2D" parent="."]

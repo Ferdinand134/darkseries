@@ -308,7 +308,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_b7xo0")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 12.0
 }, {
@@ -425,7 +425,7 @@ texture_filter = 1
 position = Vector2(-24, -39)
 rotation = -0.00401305
 sprite_frames = SubResource("SpriteFrames_00i2c")
-animation = &"hit"
+animation = &"death"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -473,6 +473,7 @@ health = 50.0
 
 [node name="death_timer" type="Timer" parent="damageable"]
 wait_time = 1.509
+one_shot = true
 
 [node name="Dashing_timer" type="Timer" parent="."]
 wait_time = 0.22
@@ -486,4 +487,5 @@ wait_time = 0.22
 [connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]
 [connection signal="enemy_hit" from="damageable" to="." method="_on_damageable_enemy_hit"]
 [connection signal="timeout" from="damageable/death_timer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="damageable/death_timer" to="damageable" method="_on_death_timer_timeout"]
 [connection signal="timeout" from="Dashing_timer" to="." method="_on_dashing_timer_timeout"]

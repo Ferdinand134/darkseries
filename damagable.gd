@@ -21,5 +21,9 @@ func hurt (damage : int):
 		idle.play("hit")
 		
 		emit_signal("enemy_hit","hit_enemy")
+		
+func _on_death_timer_timeout():
+	print("finished")
+	self.queue_free()
 	
 

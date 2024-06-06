@@ -7,7 +7,7 @@ var instructions = [
 	{"text": "Press W to jump", "action": "jump"},
 	{"text": "Press A to move left", "action": "move_left"},
 	{"text": "Press D to move right", "action": "move_right"},
-	{"text": "Press J to dash", "action": "dash"},
+	{"text": "Move and press J to dash", "action": "dash"},
 	{"text": "Press K to attack", "action": "attack"},
 	{"text": "Kill this", "message": "none"},
 	{"text": "Congrats (press enter)", "action": "continue"},
