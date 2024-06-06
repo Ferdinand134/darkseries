@@ -194,7 +194,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"attacking",
-"speed": 10.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -325,7 +325,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x2c4n"]
-radius = 213.677
+radius = 360.954
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcmpi"]
 size = Vector2(42, 106)
@@ -342,9 +342,9 @@ collision_layer = 5
 script = ExtResource("1_m2yv8")
 
 [node name="idle" type="AnimatedSprite2D" parent="."]
-position = Vector2(14, -2)
+position = Vector2(16, -2)
 sprite_frames = SubResource("SpriteFrames_02ydw")
-animation = &"spawn_in"
+animation = &"attacking"
 offset = Vector2(-5, 0)
 
 [node name="Area_detection" type="Area2D" parent="."]

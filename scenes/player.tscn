@@ -1,8 +1,7 @@
-[gd_scene load_steps=69 format=3 uid="uid://cbcmcd483bikp"]
+[gd_scene load_steps=62 format=3 uid="uid://cbcmcd483bikp"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
 [ext_resource type="Texture2D" uid="uid://cq4d77x74exua" path="res://animations/b0kmR8.png" id="2_oljpt"]
-[ext_resource type="Texture2D" uid="uid://okyqjfji6hp" path="res://animations/hit.png" id="3_tmafn"]
 [ext_resource type="Script" path="res://scenes/sword.gd" id="5_e8nqg"]
 [ext_resource type="Script" path="res://damagable.gd" id="5_xx84g"]
 [ext_resource type="Script" path="res://scenes/FacingCollisionShape.gd" id="6_x48ll"]
@@ -133,30 +132,6 @@ region = Rect2(221, 600, 177, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5r23"]
 atlas = SubResource("CompressedTexture2D_scxae")
 region = Rect2(0, 300, 576, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_viwel"]
-atlas = ExtResource("3_tmafn")
-region = Rect2(0, 0, 576, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqgcv"]
-atlas = ExtResource("3_tmafn")
-region = Rect2(576, 0, 576, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8nnc2"]
-atlas = ExtResource("3_tmafn")
-region = Rect2(0, 300, 576, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e6voa"]
-atlas = ExtResource("3_tmafn")
-region = Rect2(576, 300, 576, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1fl4n"]
-atlas = ExtResource("3_tmafn")
-region = Rect2(0, 600, 576, 300)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vi1f0"]
-atlas = ExtResource("3_tmafn")
-region = Rect2(576, 600, 576, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oopf8"]
 atlas = ExtResource("2_oljpt")
@@ -355,38 +330,11 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_viwel")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqgcv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8nnc2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e6voa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1fl4n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vi1f0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1fl4n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vi1f0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1fl4n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vi1f0")
+"texture": SubResource("AtlasTexture_ooqqs")
 }],
 "loop": true,
 "name": &"hit",
-"speed": 12.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -463,7 +411,7 @@ animations = [{
 size = Vector2(24, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m53gy"]
-size = Vector2(24.5018, 62.9995)
+size = Vector2(32.9957, 63.8008)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f34dr"]
 size = Vector2(90, 45.5)
@@ -490,6 +438,7 @@ wait_time = 0.336
 one_shot = true
 
 [node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.383
 one_shot = true
 
 [node name="damage_cooldown" type="Timer" parent="."]
