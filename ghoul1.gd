@@ -25,20 +25,26 @@ var attack_cooldown = false
 var taking_damage = false
 var dead = false
 var moving = false
+var spawning = true
 signal facing_direction_changed(facing_right : bool)
 
+func _ready():
+	idle.play("spawn_in")
 
 func _physics_process(delta):
 	var gravity_force = Vector2(0, gravity * delta)  # Calculate gravity force
 	velocity += gravity_force  # Update velocity
 	move_and_slide()  # Apply movement
 	
-	if enemy_hit:
+	if spawning:
+		is_attacking = false
+		moving = false
+	elif enemy_hit:
 		if idle.flip_h:
 			position.x= position.x+1
 			moving = true
 		if idle.flip_h == false:
-			#position.x = position.x-1
+			position.x = position.x-1
 			moving = true
 		if taking_damage ==  false:
 			enemy_hit = false
@@ -51,7 +57,7 @@ func _physics_process(delta):
 		idle.play("attacking")
 		if idle.frame==6:
 			is_attacking = false
-			print("Attack finished, resuming movement.")
+			print("Enemy Attack finished, resuming movement.")
 	else:
 		if player_chase:
 			position += (player.position - position)/speed
@@ -130,12 +136,17 @@ func _on_death_timer_timeout():
 	
 
 func _on_idle_frame_changed():
+	if spawning:
+		if idle.animation == "spawn_in":
+			if idle.frame == 10:
+				spawning = false
+				idle.play("idle")
 	if is_attacking:
 		if idle.animation == "attacking":
 			if idle.frame == 2:
 				enemy_attack.monitoring = true
-		else:
-			enemy_attack.monitoring = false
+			else:
+				enemy_attack.monitoring = false
 
 
 
@@ -147,8 +158,13 @@ func _on_bug_timer_timeout():
 
 func _on_tree_entered():
 	Global.enemy_count += 1
-	print("enter")
+	print("enter ", Global.enemy_count)
 
 
 func _on_tree_exited():
 	Global.enemy_count -= 1
+	if Global.enemy_count == 0:
+		Global.all_ghouls_dead = true
+		print(Global.all_ghouls_dead)
+		
+

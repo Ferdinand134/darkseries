@@ -11,7 +11,7 @@ signal enemy_hit(word: String)
 
 func hurt (damage : int):
 	health -= damage
-	print("hit", health)
+	print("player hit", health)
 	if(health <=0):
 		idle.play("death")
 		death_timer.start()

@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://bd2yqsy66hgoj"]
+[gd_scene load_steps=11 format=3 uid="uid://bd2yqsy66hgoj"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_12v2s"]
 [ext_resource type="Script" path="res://CanvasLayer.gd" id="1_m25tv"]
 [ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="2_cd43o"]
 [ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="3_6jqhf"]
 [ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://scenes/player.tscn" id="4_bqugq"]
-[ext_resource type="PackedScene" uid="uid://cdjo8xsm6jilb" path="res://ghoul_1.tscn" id="5_tplpl"]
+[ext_resource type="PackedScene" uid="uid://dywox4twuuird" path="res://transitioner.tscn" id="6_0uqhb"]
+[ext_resource type="PackedScene" uid="uid://bxq3pwto374hp" path="res://scenes/Darkforest.tscn" id="7_0bubi"]
+[ext_resource type="Script" path="res://scenes/TransitionButton.gd" id="7_r14eh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_42kr0"]
 font = ExtResource("2_cd43o")
@@ -15,34 +18,45 @@ font_color = Color(0, 0.168627, 0.0117647, 1)
 distance = -69.0
 
 [node name="Node2D" type="Node2D"]
-position = Vector2(406, -364)
+position = Vector2(-97, -46)
+script = ExtResource("1_12v2s")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -889.0
+offset_top = -444.0
+offset_right = 889.0
+offset_bottom = 444.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.04937, 1)
+texture = ExtResource("3_6jqhf")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 editor_description = "Hellos"
 follow_viewport_enabled = true
 script = ExtResource("1_m25tv")
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
-offset_left = 257.0
-offset_top = -503.0
-offset_right = 718.0
-offset_bottom = -392.0
-text = "How to Play "
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = -246.0
+offset_top = -185.0
+offset_right = 215.0
+offset_bottom = -74.0
+text = "
+"
 label_settings = SubResource("LabelSettings_42kr0")
-
-[node name="TextureRect" type="TextureRect" parent="."]
-show_behind_parent = true
-texture_filter = 1
-offset_left = -791.0
-offset_top = -523.0
-offset_right = 987.0
-offset_bottom = 365.0
-scale = Vector2(1.04937, 1)
-texture = ExtResource("3_6jqhf")
-expand_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-994, 154)
+position = Vector2(-1098, 268)
 rotation = 1.57103
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
@@ -51,7 +65,7 @@ scale = Vector2(3, 3)
 shape = SubResource("WorldBoundaryShape2D_5fwqo")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(56, 543)
+position = Vector2(56, 631)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-205, -397)
@@ -59,21 +73,41 @@ scale = Vector2(3, 3)
 shape = SubResource("WorldBoundaryShape2D_5fwqo")
 
 [node name="player" parent="." instance=ExtResource("4_bqugq")]
-position = Vector2(-644, 327)
+position = Vector2(99, 279)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="player"]
+
+[node name="Transitioner" parent="player/CanvasLayer2" instance=ExtResource("6_0uqhb")]
+offset_left = -126.0
+offset_top = -553.0
+offset_right = -126.0
+offset_bottom = -553.0
+scene_to_load = ExtResource("7_0bubi")
+
+[node name="TransitionButton" type="CheckButton" parent="player/CanvasLayer2" node_paths=PackedStringArray("transitioner")]
+visible = false
+offset_left = -472.0
+offset_top = -177.0
+offset_right = -424.0
+offset_bottom = -123.0
+scale = Vector2(5.17725, 5.88322)
+focus_mode = 0
+text = "             
+                       "
+icon_alignment = 2
+vertical_icon_alignment = 0
+script = ExtResource("7_r14eh")
+transitioner = NodePath("../Transitioner")
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(71, -293)
-scale = Vector2(-92.389, 133.5)
-limit_left = -380
-limit_right = 1480
-limit_bottom = 1
+rotation = 3.14159
+scale = Vector2(92.389, -133.5)
+limit_left = -981
+limit_right = 883
+limit_bottom = 400
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="ghoul2" parent="." instance=ExtResource("5_tplpl")]
-position = Vector2(-250, 150)
-scale = Vector2(0.580237, 0.60741)
-
-[node name="ghoul1" parent="." instance=ExtResource("5_tplpl")]
-position = Vector2(480, 150)
-scale = Vector2(0.761733, 0.779365)
+[connection signal="toggled" from="player/CanvasLayer2/TransitionButton" to="player/CanvasLayer2/TransitionButton" method="_on_toggled"]

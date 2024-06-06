@@ -1,7 +1,8 @@
-[gd_scene load_steps=62 format=3 uid="uid://cbcmcd483bikp"]
+[gd_scene load_steps=69 format=3 uid="uid://cbcmcd483bikp"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
 [ext_resource type="Texture2D" uid="uid://cq4d77x74exua" path="res://animations/b0kmR8.png" id="2_oljpt"]
+[ext_resource type="Texture2D" uid="uid://okyqjfji6hp" path="res://animations/hit.png" id="3_tmafn"]
 [ext_resource type="Script" path="res://scenes/sword.gd" id="5_e8nqg"]
 [ext_resource type="Script" path="res://damagable.gd" id="5_xx84g"]
 [ext_resource type="Script" path="res://scenes/FacingCollisionShape.gd" id="6_x48ll"]
@@ -132,6 +133,30 @@ region = Rect2(221, 600, 177, 300)
 [sub_resource type="AtlasTexture" id="AtlasTexture_q5r23"]
 atlas = SubResource("CompressedTexture2D_scxae")
 region = Rect2(0, 300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_viwel"]
+atlas = ExtResource("3_tmafn")
+region = Rect2(0, 0, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqgcv"]
+atlas = ExtResource("3_tmafn")
+region = Rect2(576, 0, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nnc2"]
+atlas = ExtResource("3_tmafn")
+region = Rect2(0, 300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6voa"]
+atlas = ExtResource("3_tmafn")
+region = Rect2(576, 300, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1fl4n"]
+atlas = ExtResource("3_tmafn")
+region = Rect2(0, 600, 576, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vi1f0"]
+atlas = ExtResource("3_tmafn")
+region = Rect2(576, 600, 576, 300)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oopf8"]
 atlas = ExtResource("2_oljpt")
@@ -330,11 +355,38 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ooqqs")
+"texture": SubResource("AtlasTexture_viwel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqgcv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nnc2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6voa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fl4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi1f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fl4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi1f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1fl4n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vi1f0")
 }],
 "loop": true,
 "name": &"hit",
-"speed": 5.0
+"speed": 12.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -411,7 +463,7 @@ animations = [{
 size = Vector2(24, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m53gy"]
-size = Vector2(32.9957, 63.8008)
+size = Vector2(24.5018, 62.9995)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f34dr"]
 size = Vector2(90, 45.5)
@@ -425,7 +477,7 @@ texture_filter = 1
 position = Vector2(-24, -39)
 rotation = -0.00401305
 sprite_frames = SubResource("SpriteFrames_00i2c")
-animation = &"death"
+animation = &"hit"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -441,7 +493,7 @@ one_shot = true
 one_shot = true
 
 [node name="damage_cooldown" type="Timer" parent="."]
-wait_time = 1.316
+wait_time = 0.15
 one_shot = true
 
 [node name="player_hitbox" type="Area2D" parent="."]
@@ -450,7 +502,7 @@ rotation = -0.00401305
 collision_layer = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
-position = Vector2(-13.4337, -16.9567)
+position = Vector2(-13.1706, -18.556)
 shape = SubResource("RectangleShape2D_m53gy")
 
 [node name="sword" type="Area2D" parent="." node_paths=PackedStringArray("player", "facing_collision_shape")]
@@ -468,10 +520,13 @@ facing_right_position = Vector2(46, -25.75)
 
 [node name="damageable" type="Node" parent="."]
 script = ExtResource("5_xx84g")
-health = 40.0
+health = 50.0
 
 [node name="death_timer" type="Timer" parent="damageable"]
 wait_time = 1.509
+
+[node name="Dashing_timer" type="Timer" parent="."]
+wait_time = 0.22
 
 [connection signal="frame_changed" from="idle" to="." method="_on_idle_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
@@ -482,3 +537,4 @@ wait_time = 1.509
 [connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]
 [connection signal="enemy_hit" from="damageable" to="." method="_on_damageable_enemy_hit"]
 [connection signal="timeout" from="damageable/death_timer" to="." method="_on_death_timer_timeout"]
+[connection signal="timeout" from="Dashing_timer" to="." method="_on_dashing_timer_timeout"]
