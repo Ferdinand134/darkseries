@@ -74,12 +74,14 @@ func _physics_process(delta):
 
 
 func _on_area_detection_body_entered(body):
-	player = body
-	player_chase = true
+	if body.has_method("player"):
+		player = body
+		player_chase = true
 
 func _on_area_detection_body_exited(body):
-	player = null
-	player_chase = false
+	if body.has_method("player"):
+		player = null
+		player_chase = false
 
 func _on_detect_player_body_entered(body):
 	if body.has_method("player"):

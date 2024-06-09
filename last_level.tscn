@@ -1,8 +1,14 @@
-[gd_scene load_steps=21 format=3 uid="uid://btklsd6662skm"]
+[gd_scene load_steps=29 format=3 uid="uid://btklsd6662skm"]
 
 [ext_resource type="Texture2D" uid="uid://d3t1f4qvmidj6" path="res://new folder/enviorment.png" id="1_fcnj8"]
+[ext_resource type="Script" path="res://last_level.gd" id="1_usbkr"]
 [ext_resource type="Texture2D" uid="uid://dsgsdi11xw0tt" path="res://new folder/background.png" id="2_iakcf"]
 [ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://scenes/player.tscn" id="3_d8xjo"]
+[ext_resource type="PackedScene" uid="uid://dywox4twuuird" path="res://transitioner.tscn" id="6_r2qhk"]
+[ext_resource type="Script" path="res://scenes/TransitionButton.gd" id="7_c2siv"]
+[ext_resource type="PackedScene" uid="uid://duq25g28qnsda" path="res://scenes/VICTORY.tscn" id="7_qbvph"]
+[ext_resource type="PackedScene" uid="uid://bdhcb866afifo" path="res://death_screen.tscn" id="7_txohl"]
+[ext_resource type="PackedScene" uid="uid://cdjo8xsm6jilb" path="res://ghoul_1.tscn" id="9_lnc10"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_30jq5"]
 texture = ExtResource("1_fcnj8")
@@ -13521,8 +13527,15 @@ distance = 90.9761
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2s87m"]
 size = Vector2(354.25, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vonwm"]
+size = Vector2(94.5976, 102.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p30mw"]
+size = Vector2(106.022, 110.248)
+
 [node name="Node2D" type="Node2D"]
 scale = Vector2(1.06907, 1.04515)
+script = ExtResource("1_usbkr")
 metadata/_edit_lock_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -13589,7 +13602,7 @@ metadata/_edit_lock_ = true
 
 [node name="player" parent="." instance=ExtResource("3_d8xjo")]
 position = Vector2(-473.307, -12.4384)
-knockback_velocity = 80.0
+knockback_velocity = 200.0
 SPEED = 450.0
 JUMP_VELOCITY = -550.0
 
@@ -13629,3 +13642,76 @@ position = Vector2(691, 12)
 shape = SubResource("RectangleShape2D_2s87m")
 one_way_collision = true
 metadata/_edit_lock_ = true
+
+[node name="enter_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enter_area"]
+position = Vector2(1169.65, 507.104)
+shape = SubResource("RectangleShape2D_vonwm")
+
+[node name="jumping" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="jumping"]
+position = Vector2(776.376, 316.701)
+shape = SubResource("RectangleShape2D_p30mw")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Transitioner" parent="CanvasLayer2" instance=ExtResource("6_r2qhk")]
+offset_left = -126.0
+offset_top = -553.0
+offset_right = -126.0
+offset_bottom = -553.0
+scene_to_load = ExtResource("7_qbvph")
+scene_to_load2 = ExtResource("7_txohl")
+
+[node name="TransitionButton" type="CheckButton" parent="CanvasLayer2" node_paths=PackedStringArray("transitioner")]
+visible = false
+offset_left = -472.0
+offset_top = -177.0
+offset_right = -424.0
+offset_bottom = -123.0
+scale = Vector2(5.17725, 5.88322)
+focus_mode = 0
+text = "             
+                       "
+icon_alignment = 2
+vertical_icon_alignment = 0
+script = ExtResource("7_c2siv")
+transitioner = NodePath("../Transitioner")
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 773.0
+offset_top = 328.0
+offset_right = 891.0
+offset_bottom = 351.0
+text = "jump high here"
+
+[node name="ghoul1" parent="." instance=ExtResource("9_lnc10")]
+position = Vector2(-21.514, 6.6976)
+scale = Vector2(0.65, 0.65)
+
+[node name="ghoul2" parent="." instance=ExtResource("9_lnc10")]
+position = Vector2(302.132, -125.341)
+scale = Vector2(0.65, 0.65)
+
+[node name="ghoul3" parent="." instance=ExtResource("9_lnc10")]
+position = Vector2(-505.112, 537.722)
+scale = Vector2(0.65, 0.65)
+
+[node name="ghoul4" parent="." instance=ExtResource("9_lnc10")]
+position = Vector2(389.123, 546.333)
+scale = Vector2(0.65, 0.65)
+
+[node name="ghoul5" parent="." instance=ExtResource("9_lnc10")]
+position = Vector2(1140.24, -22.0063)
+scale = Vector2(0.65, 0.65)
+
+[connection signal="body_entered" from="enter_area" to="player" method="_on_enter_area_body_entered"]
+[connection signal="body_entered" from="jumping" to="player" method="_on_jumping_body_entered"]
+[connection signal="body_exited" from="jumping" to="player" method="_on_jumping_body_exited"]
+[connection signal="toggled" from="CanvasLayer2/TransitionButton" to="CanvasLayer2/TransitionButton" method="_on_toggled"]

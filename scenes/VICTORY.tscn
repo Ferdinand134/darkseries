@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://duq25g28qnsda"]
+
+[ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="1_g4mt8"]
+
+[sub_resource type="Gradient" id="Gradient_l83tc"]
+offsets = PackedFloat32Array(0.164634)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_boglg"]
+gradient = SubResource("Gradient_l83tc")
+
+[sub_resource type="LabelSettings" id="LabelSettings_q3e10"]
+font = ExtResource("1_g4mt8")
+font_size = 112
+font_color = Color(1, 1, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1625.0
+offset_bottom = 841.0
+texture = SubResource("GradientTexture2D_boglg")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "VICTORY!!!"
+label_settings = SubResource("LabelSettings_q3e10")
+horizontal_alignment = 1
+vertical_alignment = 1

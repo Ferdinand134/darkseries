@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_lgubq"]
 [ext_resource type="Texture2D" uid="uid://cq4d77x74exua" path="res://animations/b0kmR8.png" id="2_oljpt"]
+[ext_resource type="Script" path="res://scenes/damageableP.gd" id="5_4nyon"]
 [ext_resource type="Script" path="res://scenes/sword.gd" id="5_e8nqg"]
-[ext_resource type="Script" path="res://damagable.gd" id="5_xx84g"]
 [ext_resource type="Script" path="res://scenes/FacingCollisionShape.gd" id="6_x48ll"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oyngr"]
@@ -425,7 +425,7 @@ texture_filter = 1
 position = Vector2(-24, -39)
 rotation = -0.00401305
 sprite_frames = SubResource("SpriteFrames_00i2c")
-animation = &"death"
+animation = &"hit"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -467,16 +467,16 @@ script = ExtResource("6_x48ll")
 facing_left_postion = Vector2(-85, -25.75)
 facing_right_position = Vector2(46, -25.75)
 
-[node name="damageable" type="Node" parent="."]
-script = ExtResource("5_xx84g")
-health = 50.0
-
-[node name="death_timer" type="Timer" parent="damageable"]
-wait_time = 1.509
-one_shot = true
-
 [node name="Dashing_timer" type="Timer" parent="."]
 wait_time = 0.22
+
+[node name="damageableP" type="Node" parent="."]
+script = ExtResource("5_4nyon")
+health = 50.0
+
+[node name="death_timer" type="Timer" parent="damageableP"]
+wait_time = 2.0
+one_shot = true
 
 [connection signal="frame_changed" from="idle" to="." method="_on_idle_frame_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
@@ -485,7 +485,6 @@ wait_time = 0.22
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="sword" to="." method="_on_sword_body_entered"]
 [connection signal="body_entered" from="sword" to="sword" method="_on_body_entered"]
-[connection signal="enemy_hit" from="damageable" to="." method="_on_damageable_enemy_hit"]
-[connection signal="timeout" from="damageable/death_timer" to="." method="_on_death_timer_timeout"]
-[connection signal="timeout" from="damageable/death_timer" to="damageable" method="_on_death_timer_timeout"]
 [connection signal="timeout" from="Dashing_timer" to="." method="_on_dashing_timer_timeout"]
+[connection signal="enemy_hit" from="damageableP" to="." method="_on_damageable_p_enemy_hit"]
+[connection signal="timeout" from="damageableP/death_timer" to="damageableP" method="_on_death_timer_timeout"]

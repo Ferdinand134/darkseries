@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd2yqsy66hgoj"]
+[gd_scene load_steps=12 format=3 uid="uid://bd2yqsy66hgoj"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_12v2s"]
 [ext_resource type="Script" path="res://CanvasLayer.gd" id="1_m25tv"]
 [ext_resource type="FontFile" uid="uid://bwcf245mjigvw" path="res://fonts/Stick-Regular.ttf" id="2_cd43o"]
 [ext_resource type="Texture2D" uid="uid://6jwjw5ycclaw" path="res://ee+g6i.png" id="3_6jqhf"]
 [ext_resource type="PackedScene" uid="uid://cbcmcd483bikp" path="res://scenes/player.tscn" id="4_bqugq"]
-[ext_resource type="PackedScene" path="res://transitioner.tscn" id="6_0uqhb"]
+[ext_resource type="PackedScene" uid="uid://dywox4twuuird" path="res://transitioner.tscn" id="6_0uqhb"]
 [ext_resource type="PackedScene" uid="uid://bxq3pwto374hp" path="res://scenes/Darkforest.tscn" id="7_0bubi"]
 [ext_resource type="Script" path="res://scenes/TransitionButton.gd" id="7_r14eh"]
+[ext_resource type="PackedScene" uid="uid://bdhcb866afifo" path="res://death_screen.tscn" id="8_3ginx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_42kr0"]
 font = ExtResource("2_cd43o")
@@ -85,17 +86,27 @@ shape = SubResource("WorldBoundaryShape2D_5fwqo")
 [node name="player" parent="." instance=ExtResource("4_bqugq")]
 position = Vector2(99, 279)
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="player"]
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(71, -293)
+rotation = 3.14159
+scale = Vector2(92.389, -133.5)
+limit_left = -981
+limit_right = 883
+limit_bottom = 400
+limit_smoothed = true
+position_smoothing_enabled = true
 
-[node name="Transitioner" parent="player/CanvasLayer2" instance=ExtResource("6_0uqhb")]
+[node name="CanvasLayer3" type="CanvasLayer" parent="player"]
+
+[node name="Transitioner" parent="player/CanvasLayer3" instance=ExtResource("6_0uqhb")]
 offset_left = -126.0
 offset_top = -553.0
 offset_right = -126.0
 offset_bottom = -553.0
 scene_to_load = ExtResource("7_0bubi")
+scene_to_load2 = ExtResource("8_3ginx")
 
-[node name="TransitionButton" type="CheckButton" parent="player/CanvasLayer2" node_paths=PackedStringArray("transitioner")]
-visible = false
+[node name="TransitionButton" type="CheckButton" parent="player/CanvasLayer3" node_paths=PackedStringArray("transitioner")]
 offset_left = -472.0
 offset_top = -177.0
 offset_right = -424.0
@@ -110,14 +121,4 @@ script = ExtResource("7_r14eh")
 transitioner = NodePath("../Transitioner")
 metadata/_edit_use_anchors_ = true
 
-[node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(71, -293)
-rotation = 3.14159
-scale = Vector2(92.389, -133.5)
-limit_left = -981
-limit_right = 883
-limit_bottom = 400
-limit_smoothed = true
-position_smoothing_enabled = true
-
-[connection signal="toggled" from="player/CanvasLayer2/TransitionButton" to="player/CanvasLayer2/TransitionButton" method="_on_toggled"]
+[connection signal="toggled" from="player/CanvasLayer3/TransitionButton" to="player/CanvasLayer3/TransitionButton" method="_on_toggled"]

@@ -14,14 +14,13 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity") +80
 @onready var damage_cooldown = $damage_cooldown
 @onready var transition_button = $"../CanvasLayer2/TransitionButton"
 @onready var sword = $sword
-@onready var enter_area = $"../enter_area"
 @onready var player_hitbox = $player_hitbox
-@onready var damageable = $damageable
 @export var knockback_velocity : float = 1000
 @export var SPEED = 150.0
 @export var JUMP_VELOCITY = -400.0
 @export var DASH_VELOCITY = 4000.0
 @onready var death_timer = $damageable/death_timer
+@onready var damageable_p = $damageableP
 
 
 var door_area =false
@@ -56,6 +55,9 @@ func _physics_process(delta):
 		elif dead:
 			player_hitbox.monitoring = false
 			player_hitbox.monitorable = false
+			collision_shape_2d.disabled = true
+			print(player_hitbox.monitoring)
+			player_hit = true
 		moving = false
 		
 	#handles attacking animations
@@ -128,8 +130,9 @@ func _physics_process(delta):
 				attack_cooldown.start()
 		
 		if door_area:
-			if Input.is_action_just_pressed("continue"):
-				transition_button._on_toggled(true)
+			if Global.enemy_count == 0:
+				if Input.is_action_just_pressed("continue"):
+					transition_button._on_toggled(true)
 
 		move_and_slide()
 
@@ -157,36 +160,36 @@ func _on_idle_frame_changed():
 			sword.monitoring = false
 
 
-func _on_damageable_enemy_hit(word):
+func _on_damage_cooldown_timeout():
+	player_hit = false
+	print("end timer")
+
+func _on_dashing_timer_timeout():
+	is_dashing = false
+
+func _on_enter_area_body_entered(body):
+	if body.has_method("player"):
+		print("enter")
+		door_area = true
+
+
+func _on_damageable_p_enemy_hit(word):
 	if word == "hit_enemy":
 		player_hit =true
 		taking_damage = true
 		print("start timer")
 		damage_cooldown.start()
 	elif word == "death":
+		print("death")
 		player_hit = true
 		dead = true
 		taking_damage = true
-		death_timer.start()
+		
 
 
-func _on_damage_cooldown_timeout():
-	player_hit = false
-	print("end timer")
+func _on_jumping_body_entered(body):
+	JUMP_VELOCITY += -450
 
 
-
-	
-
-func _on_dashing_timer_timeout():
-	is_dashing = false
-
-
-func _on_enter_area_body_entered(body):
-	if body.has_method("player"):
-		door_area = true
-
-
-func _on_death_timer_timeout():
-	print("finished")
-	self.queue_free()
+func _on_jumping_body_exited(body):
+	JUMP_VELOCITY += 450

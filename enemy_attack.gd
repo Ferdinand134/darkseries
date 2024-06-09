@@ -9,7 +9,7 @@ func _ready():
 
 func _on_body_entered(body):
 	for child in body.get_children():
-		if child is damageable:
+		if child is damageableP:
 			child.hurt(damage)
 			
 

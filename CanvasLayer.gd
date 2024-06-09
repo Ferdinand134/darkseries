@@ -1,6 +1,7 @@
 extends Node
 
-@onready var transition_button = $"../player/CanvasLayer2/TransitionButton"
+@onready var transition_button = $"../player/CanvasLayer3/TransitionButton"
+
 
 var instructions = [
 	{"text": "How to play (press enter)", "action": "continue"},
@@ -13,6 +14,7 @@ var instructions = [
 	{"text": "Congrats (press enter)", "action": "continue"},
 	{"text": "In this game, you have 5 hearts", "action": "continue"},
 	{"text": "You can only get hit 5 times", "action": "continue"},
+	{"text": "Press enter to enter doors", "action": "continue"},
 	{"text": "Good Luck!", "action": "continue"},
 ]
 
@@ -22,7 +24,7 @@ func _ready():
 	update_instruction()
 
 func _input(event):
-	if Global.count == 11:
+	if Global.count == 12:
 		transition_button._on_toggled(true)
 		Global.count =0
 	elif Global.count == 7:
